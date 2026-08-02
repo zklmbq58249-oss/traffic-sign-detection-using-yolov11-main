@@ -2,5 +2,6 @@
 .ultralytics/
 datasets/
 runs/baseline_yolo11/
+runs/my_training/traffic_sign_custom2_finetune_640*/
 __pycache__/
 *.py[cod]
