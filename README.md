@@ -253,6 +253,13 @@ The fine-tuning entry point uses a 640-pixel input by default to preserve more
 detail for small traffic signs. The historical 416-pixel baseline commands
 above remain unchanged for controlled comparison.
 
+To fine-tune the existing `traffic_sign_custom2` checkpoint specifically at
+640 pixels and evaluate the new best checkpoint on both `val` and `test`, run:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\retrain_traffic_sign_640.py
+```
+
 Add `--test-after-train` to evaluate the resulting `best.pt` on the test split.
 ## Limitations
 
