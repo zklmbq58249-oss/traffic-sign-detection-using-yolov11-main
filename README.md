@@ -157,6 +157,99 @@ The `yolo11n` version of the model is used to fine-tune on the dataset. The mode
         ```bash
         python3 process_video.py
         ```
+
+## Reproducible YOLO11 Baseline
+
+The original repository contains inference media and a trained weight, but not the
+training dataset or notebook. The scripts below create a versioned YOLO11 baseline
+without changing the original inference code.
+
+On Windows PowerShell, create the isolated legacy environment:
+
+```powershell
+.\scripts\setup_yolo11_baseline.ps1
+```
+
+The script requires a Python 3.9+ interpreter that can load the Windows root
+certificate store. If `python` resolves to an unsuitable Conda environment, pass
+the intended interpreter explicitly, for example:
+
+```powershell
+.\scripts\setup_yolo11_baseline.ps1 -PythonExecutable D:\python\python.exe
+```
+
+If PyTorch's download host needs to go through a conventional local proxy, pass
+it explicitly. This only affects the setup process and does not change Windows
+proxy settings:
+
+```powershell
+.\scripts\setup_yolo11_baseline.ps1 `
+  -PythonExecutable D:\python\python.exe `
+  -ProxyUrl http://127.0.0.1:7897
+```
+
+If your network closes TLS connections to those official hosts, retry with the
+explicit, less secure fallback below. It bypasses certificate verification only
+for PyPI and the official PyTorch host:
+
+```powershell
+.\scripts\setup_yolo11_baseline.ps1 -TrustOfficialHosts
+```
+
+This uses `ultralytics==8.3.5`, `torch==2.7.1` with CUDA 12.8, and a 416-pixel
+input size. Download **Version 6** of the Self-Driving Cars dataset linked above,
+export it in standard YOLO format, and extract it to
+`datasets/self-driving-cars-v6/`. Keep the generated `data.yaml` unchanged so the
+class order remains identical to the export.
+
+Validate the data before evaluating it. The default validation expects 3530 train,
+801 validation, 638 test images, and 15 classes:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\scripts\validate_dataset.py --data .\datasets\self-driving-cars-v6\data.yaml
+```
+
+Run the provided weight as the historical reference. Without `-DataYaml`, this
+records the environment and creates annotated demo media only. With it, the script
+also evaluates both `val` and `test` splits and stores every artifact under
+`runs/baseline_yolo11/`:
+
+```powershell
+.\scripts\run_legacy_baseline.ps1 -DataYaml datasets/self-driving-cars-v6/data.yaml
+```
+
+Recreate the documented YOLO11n training conditions (50 epochs, batch 16,
+416-pixel input, seed 42) and evaluate its `best.pt` on the test split:
+
+```powershell
+.\scripts\train_yolo11_baseline.ps1 -DataYaml datasets/self-driving-cars-v6/data.yaml
+```
+
+Finally, record headless video latency after 50 warm-up frames. The JSON report
+contains mean/median/P95 latency, FPS, and peak GPU memory. It times decode,
+prediction, and annotation but excludes model loading and output video encoding:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\scripts\benchmark_inference.py `
+  --model .\model\traffic_sign_detector.pt `
+  --source .\data\input\traffic_signs.mp4 `
+  --output .\runs\baseline_yolo11\legacy_video_benchmark.json `
+  --imgsz 416 --device 0
+```
+
+The original supplied checkpoint is a historical reference. For the eventual
+YOLO26 comparison, train a new YOLO11n and YOLO26n in the same modern Ultralytics
+environment using the same exported data, 416 input size, seed, batch size, and
+test script.
+
+To fine-tune the bundled traffic-sign checkpoint on the local
+`self-driving-cars-v6` dataset, run:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\train_traffic_sign_model.py
+```
+
+Add `--test-after-train` to evaluate the resulting `best.pt` on the test split.
 ## Limitations
 
 The model tends to perform better with images and is fairly accurate with videos in certain scenarios. So, to obtain better results with videos or real-time data, consider fine-tuning a deeper model available on ultralytics docs.

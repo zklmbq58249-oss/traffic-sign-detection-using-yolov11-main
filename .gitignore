@@ -1,0 +1,6 @@
+.venv-yolo11/
+.ultralytics/
+datasets/
+runs/baseline_yolo11/
+__pycache__/
+*.py[cod]

@@ -1,0 +1,11 @@
+# Immutable settings for the legacy YOLO11 reproduction baseline.
+# Keep these settings aligned with the future controlled YOLO11/YOLO26 comparison.
+model: yolo11n.pt
+imgsz: 416
+epochs: 50
+batch: 16
+device: 0
+seed: 42
+deterministic: true
+workers: 4
+data_version: roboflow-self-driving-cars-v6
