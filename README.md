@@ -249,6 +249,10 @@ To fine-tune the bundled traffic-sign checkpoint on the local
 .\.venv-yolo11\Scripts\python.exe .\train_traffic_sign_model.py
 ```
 
+The fine-tuning entry point uses a 640-pixel input by default to preserve more
+detail for small traffic signs. The historical 416-pixel baseline commands
+above remain unchanged for controlled comparison.
+
 Add `--test-after-train` to evaluate the resulting `best.pt` on the test split.
 ## Limitations
 

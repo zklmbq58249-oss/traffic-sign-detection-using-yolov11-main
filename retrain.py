@@ -53,7 +53,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--data", default="datasets/self-driving-cars-v6/data.yaml")
     parser.add_argument("--epochs", type=int, default=20, help="Additional fine-tuning epochs")
-    parser.add_argument("--imgsz", type=int, default=416)
+    parser.add_argument("--imgsz", type=int, default=640)
     parser.add_argument("--batch", type=int, default=16)
     parser.add_argument("--device", default="0", help="CUDA device, e.g. 0; use cpu for CPU training")
     parser.add_argument("--seed", type=int, default=42)

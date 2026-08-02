@@ -44,7 +44,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--model", default="model/traffic_sign_detector.pt", help="Starting checkpoint path")
     parser.add_argument("--data", default="datasets/self-driving-cars-v6/data.yaml", help="YOLO data.yaml path")
     parser.add_argument("--epochs", type=int, default=50)
-    parser.add_argument("--imgsz", type=int, default=416)
+    parser.add_argument("--imgsz", type=int, default=640)
     parser.add_argument("--batch", type=int, default=16)
     parser.add_argument("--device", default="0", help="CUDA device, e.g. 0; use cpu for CPU training")
     parser.add_argument("--seed", type=int, default=42)
