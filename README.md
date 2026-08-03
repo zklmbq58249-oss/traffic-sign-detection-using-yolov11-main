@@ -20,6 +20,11 @@
 The [Self-Driving Cars Dataset](https://universe.roboflow.com/selfdriving-car-qtywx/self-driving-cars-lfjou/dataset/6) is used to train the traffic sign detection model. It contains **4969** total images
 split into train, val and test sets with **3530**, **801** and **638** images of dimension `416x416` respectively. The dataset contains images of 15 different traffic signs.
 
+For the controlled experiments committed to this repository, use the documented
+[dataset source, version, and deterministic split manifest](docs/DATASET.md).
+The controlled split is `3478/497/994` for `train/val/test`; raw images and
+labels are deliberately excluded from Git.
+
 The classes available in the dataset are:
 
 1. all
