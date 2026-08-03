@@ -209,6 +209,34 @@ Validate the data before evaluating it. The default validation expects 3530 trai
 .\.venv-yolo11\Scripts\python.exe .\scripts\validate_dataset.py --data .\datasets\self-driving-cars-v6\data.yaml
 ```
 
+To remove exact duplicate image content before a new experiment, build the
+recoverable deduplicated copy below. The original dataset is not modified. The
+script keeps one valid annotation file per image hash, records annotation
+conflicts in `dedup_report.json`, and rebuilds a deterministic
+`train:test:val = 7:2:1` split:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\scripts\deduplicate_yolo_dataset.py `
+  --source .\datasets\self-driving-cars-v6 `
+  --output .\datasets\self-driving-cars-v6_deduplicated `
+  --seed 42
+```
+
+Use `datasets/self-driving-cars-v6_deduplicated/data.yaml` explicitly when
+training or evaluating on the cleaned copy.
+
+To retrain YOLO11 at 640 pixels on this cleaned dataset and automatically
+evaluate `val` and `test`, run:
+
+```powershell
+.\.venv-yolo11\Scripts\python.exe .\retrain_deduplicated_640.py
+```
+
+On Windows the script defaults to `--workers 0` to avoid multiprocessing
+`DataLoader worker exited unexpectedly` failures. If a previous run stopped
+partway through, use a new run name, for example
+`--name traffic_sign_dedup_640_retry1`.
+
 Run the provided weight as the historical reference. Without `-DataYaml`, this
 records the environment and creates annotated demo media only. With it, the script
 also evaluates both `val` and `test` splits and stores every artifact under
