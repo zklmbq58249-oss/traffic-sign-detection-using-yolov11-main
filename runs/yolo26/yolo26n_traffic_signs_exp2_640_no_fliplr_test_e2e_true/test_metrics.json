@@ -1,0 +1,39 @@
+{
+  "experiment": "EXP-2",
+  "model": "runs/yolo26/yolo26n_traffic_signs_exp2_640_no_fliplr/weights/best.pt",
+  "data": "configs/yolo26_data.yaml",
+  "split": "test",
+  "images": 994,
+  "instances": 1197,
+  "evaluation": {
+    "imgsz": 640,
+    "batch": 16,
+    "device": "0",
+    "workers": 4,
+    "end2end": true,
+    "fliplr_training": 0.0
+  },
+  "metrics": {
+    "precision": 0.9018044306,
+    "recall": 0.8739505977,
+    "mAP50": 0.9359089342,
+    "mAP50_95": 0.7945149483
+  },
+  "per_class": {
+    "Green Light": {"images": 105, "instances": 150, "precision": 0.873, "recall": 0.707, "mAP50": 0.845, "mAP50_95": 0.524},
+    "Red Light": {"images": 102, "instances": 132, "precision": 0.866, "recall": 0.683, "mAP50": 0.828, "mAP50_95": 0.498},
+    "Speed Limit 10": {"images": 3, "instances": 4, "precision": 0.504, "recall": 0.500, "mAP50": 0.702, "mAP50_95": 0.559},
+    "Speed Limit 100": {"images": 80, "instances": 82, "precision": 0.960, "recall": 0.976, "mAP50": 0.982, "mAP50_95": 0.851},
+    "Speed Limit 110": {"images": 30, "instances": 31, "precision": 0.848, "recall": 0.935, "mAP50": 0.920, "mAP50_95": 0.780},
+    "Speed Limit 120": {"images": 63, "instances": 64, "precision": 0.966, "recall": 0.906, "mAP50": 0.976, "mAP50_95": 0.868},
+    "Speed Limit 20": {"images": 82, "instances": 83, "precision": 0.921, "recall": 0.988, "mAP50": 0.992, "mAP50_95": 0.898},
+    "Speed Limit 30": {"images": 98, "instances": 99, "precision": 0.979, "recall": 0.889, "mAP50": 0.957, "mAP50_95": 0.875},
+    "Speed Limit 40": {"images": 63, "instances": 66, "precision": 0.915, "recall": 0.909, "mAP50": 0.977, "mAP50_95": 0.888},
+    "Speed Limit 50": {"images": 83, "instances": 90, "precision": 0.942, "recall": 0.956, "mAP50": 0.969, "mAP50_95": 0.847},
+    "Speed Limit 60": {"images": 94, "instances": 94, "precision": 0.971, "recall": 0.968, "mAP50": 0.972, "mAP50_95": 0.888},
+    "Speed Limit 70": {"images": 96, "instances": 96, "precision": 0.939, "recall": 0.955, "mAP50": 0.979, "mAP50_95": 0.874},
+    "Speed Limit 80": {"images": 90, "instances": 91, "precision": 0.962, "recall": 0.912, "mAP50": 0.974, "mAP50_95": 0.862},
+    "Speed Limit 90": {"images": 46, "instances": 46, "precision": 0.902, "recall": 0.826, "mAP50": 0.971, "mAP50_95": 0.792},
+    "Stop": {"images": 69, "instances": 69, "precision": 0.980, "recall": 1.000, "mAP50": 0.995, "mAP50_95": 0.914}
+  }
+}

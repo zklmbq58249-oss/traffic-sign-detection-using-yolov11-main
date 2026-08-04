@@ -1,0 +1,16 @@
+.venv-yolo26/
+.ultralytics/
+.ruff_cache/
+__pycache__/
+*.py[cod]
+datasets/
+
+# Local outputs intentionally omitted from the published YOLO26 summary.
+runs/baseline_yolo11/
+runs/my_training/
+runs/yolo26/**/train_batch*.jpg
+runs/yolo26/**/val_batch*.jpg
+runs/yolo26/**/labels.jpg
+runs/yolo26/**/weights/last.pt
+yolo26n.pt
+屏幕截图 *.png

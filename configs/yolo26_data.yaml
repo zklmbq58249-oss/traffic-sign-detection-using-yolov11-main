@@ -1,0 +1,25 @@
+# Same non-deduplicated dataset used by the completed YOLO11 baseline.
+# Do not add `path: ../datasets/...`: on Windows, Ultralytics may resolve a
+# relative `path` against its global datasets directory. These paths are
+# intentionally relative to this configuration file instead.
+train: ../datasets/self-driving-cars-v6/train/images
+val: ../datasets/self-driving-cars-v6/val/images
+test: ../datasets/self-driving-cars-v6/test/images
+
+nc: 15
+names:
+  - Green Light
+  - Red Light
+  - Speed Limit 10
+  - Speed Limit 100
+  - Speed Limit 110
+  - Speed Limit 120
+  - Speed Limit 20
+  - Speed Limit 30
+  - Speed Limit 40
+  - Speed Limit 50
+  - Speed Limit 60
+  - Speed Limit 70
+  - Speed Limit 80
+  - Speed Limit 90
+  - Stop
